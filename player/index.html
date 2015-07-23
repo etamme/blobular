@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blobular</title>
+    <script type="text/javascript" src="http://sipjs.com/download/sip-0.7.0.min.js"></script> 
+    <script type="text/javascript" src="scripts/player.js"></script>
+  </head>
+  <body>
+    <center>
+      <canvas id="viewport"></canvas>
+      <h1>use arrow keys to control</h1>
+    </center>
+    <script type="text/javascript">
+      var player = new Player({});
+      document.onkeyup = (function(e) {
+        e = e || window.event;
+        switch(e.which) {
+          case 37: // left
+            player.left();
+          break;
+          case 38: // up
+            player.up();
+          break;
+          case 39: // right
+            player.right();
+          break;
+          case 40: // down
+            player.down();
+          break;
+        default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+      });
+      player.draw();
+      setInterval( "player.sendMove()", 900 );
+    </script>
+  </body>
+</html>
